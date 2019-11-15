@@ -1,7 +1,11 @@
 
-1. The data cleaning, inclusion, exclusion and transformations script is available in Scripts/Final_Clean_Data.R
-2. Descriptive statistics scripts are available in Scripts/Demographics folder. 
-3. Scaling Coefficent Estimations: The scripts used to examine whether scaling coefficients of each local volume with Total brain volume is isometric, hypoallometric, or hyperallometric are in the Scripts/Allometry_Isometry folder. 
-4. MGCFA: The scripts used to conduct the MGCFAs are in the Scripts/MGCFA folder. 
-5. LMEMs: The scripts used to conduct (i) the corresponding LMEMs (corresponding to the MGCFA analyses), (ii) the LMEMs to examining age, sex, and or full scale intelligence quotient (FSIQ) effects on neuroanatomical group differences, and (iii) the effect of TBV adjustment technique on the results from the exploratory analyses are in the Scripts/LMEM folder. 
-6. Replication of [Zhang and colleagues (2018)](https://www.cambridge.org/core/journals/psychological-medicine/article/revisiting-subcortical-brain-volume-correlates-of-autism-in-the-abide-dataset-effects-of-age-and-sex/CB66FFA7347DBE59C446BA66B1BA1A66): The scripts used to conduct the corresponding LMEMs (corresponding to the MGCFA analyses) and the LMEMs to explore age, sex, and or full scale intelligence quotient (FSIQ) effects are in the Scripts folder under Zhang_Replication_LMEMs.R. Replicated [supplemental figures from Zhang and colleagues (2018)](https://www.cambridge.org/core/journals/psychological-medicine/article/revisiting-subcortical-brain-volume-correlates-of-autism-in-the-abide-dataset-effects-of-age-and-sex/CB66FFA7347DBE59C446BA66B1BA1A66#fndtn-supplementary-materials) were generated from the Zhang_Supplemental_Figures.R script. 
+1. Run Final_Clean_Data.R for data cleaning, inclusion, exclusion, and transformations. 
+2. Run scripts in the Demographics folder for descriptive statistics. 
+3. Run scripts in the Allometry_Isometry folder to obtain the scaling coefficent of each local volume.
+4. Run scripts in the MGCFA folder to obtain MGFA results.
+5. Run scripts in the LMEMs folder to obtain LMEMs results.
+  (i) the corresponding LMEMs (corresponding to the MGCFA analyses)
+  (ii) the LMEMs to examining age, sex, and or full scale intelligence quotient (FSIQ) effects on neuroanatomical group differences
+  (iii) the effect of TBV adjustment technique on the results from the exploratory analyses are in the Scripts/LMEM folder. 
+6. Run Zhang_Replication_LMEMs.R to replicate [Zhang and colleagues' (2018)](https://www.cambridge.org/core/journals/psychological-medicine/article/revisiting-subcortical-brain-volume-correlates-of-autism-in-the-abide-dataset-effects-of-age-and-sex/CB66FFA7347DBE59C446BA66B1BA1A66) study. 
+7. Run Zhang_Supplemental_Figures.R to obtain the [supplemental figures from Zhang and colleagues (2018)](https://www.cambridge.org/core/journals/psychological-medicine/article/revisiting-subcortical-brain-volume-correlates-of-autism-in-the-abide-dataset-effects-of-age-and-sex/CB66FFA7347DBE59C446BA66B1BA1A66#fndtn-supplementary-materials). 

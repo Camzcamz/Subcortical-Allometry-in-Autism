@@ -1,1 +1,2 @@
-1. The 
+1. Run Zhang_Replication_LMEMs.R to replicate [Zhang and colleagues' (2018)](https://www.cambridge.org/core/journals/psychological-medicine/article/revisiting-subcortical-brain-volume-correlates-of-autism-in-the-abide-dataset-effects-of-age-and-sex/CB66FFA7347DBE59C446BA66B1BA1A66) study. 
+2. Run Zhang_Supplemental_Figures.R to obtain the [supplemental figures from Zhang and colleagues (2018)](https://www.cambridge.org/core/journals/psychological-medicine/article/revisiting-subcortical-brain-volume-correlates-of-autism-in-the-abide-dataset-effects-of-age-and-sex/CB66FFA7347DBE59C446BA66B1BA1A66#fndtn-supplementary-materials). 

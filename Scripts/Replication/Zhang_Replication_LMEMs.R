@@ -73,7 +73,7 @@ Hippocampal_list_model_summary_DF$SD <- unlist(List_SD)
 Hippocampal_list_model_summary_DF$Cohen_D <- (Hippocampal_list_model_summary_DF$Beta/Hippocampal_list_model_summary_DF$SD)
 Hippocampal_list_model_summary_DF
 
-sink("Hippocampus_Table_Interaction.csv") 
+sink("CSV/Hippocampus_Table_Interaction.csv") 
 print(Hippocampal_list_model_summary_DF)
 sink() 
 
@@ -117,7 +117,7 @@ Caudate_list = c(Caudate_model1, Caudate_model2, Caudate_model3, Caudate_model4,
 Caudate_list_coef<- lapply(Caudate_list, coef)
 names(Caudate_list_coef) <- c("No_TBV_Age", "No_TBV_Age2", "TBV_Covariate_Age", "TBV_Covariate_Age2", "TBV_Allometric_Age","TBV_Allometric_Age2")
 
-sink("Caudate_list.csv") 
+sink("CSV/Caudate_list.csv") 
 print(Caudate_list_coef)
 sink()
 
@@ -148,7 +148,7 @@ List_SD <- lapply(List_SE,std)
 Caudate_list_model_summary_DF$SD <- unlist(List_SD)
 Caudate_list_model_summary_DF$Cohen_D <- (Caudate_list_model_summary_DF$Beta/Caudate_list_model_summary_DF$SD)
 
-sink("Caudate.csv") 
+sink("CSV/Caudate.csv") 
 print("Group Effect")
 print(Caudate_list_model_summary_DF)
 sink() 
@@ -173,7 +173,7 @@ Putamen_list = c(Putamen_model1, Putamen_model2, Putamen_model3, Putamen_model4,
 Putamen_list_coef<- lapply(Putamen_list, coef)
 names(Putamen_list_coef) <- c("No_TBV_Age", "No_TBV_Age2", "TBV_Covariate_Age2", "TBV_Covariate_Age", "TBV_Allometric_Age","TBV_Allometric_Age2")
 
-sink("Putamen_list.csv") 
+sink("CSV/Putamen_list.csv") 
 print(Putamen_list_coef)
 sink()
 
@@ -202,7 +202,7 @@ List_SD <- lapply(List_SE,std)
 Putamen_list_model_summary_DF$SD <- unlist(List_SD)
 Putamen_list_model_summary_DF$Cohen_D <- (Putamen_list_model_summary_DF$Beta/Putamen_list_model_summary_DF$SD)
 
-sink("Putamen.csv") 
+sink("CSV/Putamen.csv") 
 print(Putamen_list_model_summary_DF)
 sink() 
 
@@ -228,7 +228,7 @@ TotalGrayVol_model6 <- lmer(TotalGrayVol_log ~ Total_Brain_Vol_log * DX_GROUP + 
                             Abide_MGCFA)
 list = c(TotalGrayVol_model1, TotalGrayVol_model2, TotalGrayVol_model3, TotalGrayVol_model4, TotalGrayVol_model5, TotalGrayVol_model6)
 
-sink("TotalGrayVol.csv") 
+sink("CSV/TotalGrayVol.csv") 
 print(lapply(list, coef))
 sink()
 
@@ -247,7 +247,7 @@ CorticalWhiteMatterVol_model6 <- lmer(CorticalWhiteMatterVol_log ~ Total_Brain_V
                                       Abide_MGCFA)
 list = c(CorticalWhiteMatterVol_model1, CorticalWhiteMatterVol_model2, CorticalWhiteMatterVol_model3, CorticalWhiteMatterVol_model4, CorticalWhiteMatterVol_model5, CorticalWhiteMatterVol_model6)
 
-sink("CorticalWhiteMatterVol.csv") 
+sink("CSV/CorticalWhiteMatterVol.csv") 
 print(lapply(list, coef))
 sink()
 
@@ -265,7 +265,7 @@ Amygdala_model6 <- lmer(Amygdala ~ Total_Brain_Vol_log * DX_GROUP + AGE_AT_SCAN 
                         Abide_MGCFA_data_long)
 list = c(Amygdala_model1, Amygdala_model2, Amygdala_model3, Amygdala_model4, Amygdala_model5, Amygdala_model6)
 
-sink("Amygdala.csv") 
+sink("CSV/Amygdala.csv") 
 print(lapply(list, coef))
 sink()
 
@@ -301,7 +301,7 @@ Pallidum_model6 <- lmer(Pallidum ~ Total_Brain_Vol_log * DX_GROUP + AGE_AT_SCAN 
                         Abide_MGCFA_data_long)
 list = c(Pallidum_model1, Pallidum_model2, Pallidum_model3, Pallidum_model4, Pallidum_model5, Pallidum_model6)
 
-sink("Pallidum.csv") 
+sink("CSV/Pallidum.csv") 
 print(lapply(list, coef))
 sink()
 
@@ -319,6 +319,6 @@ Accumbens_model6 <- lmer(Accumbens ~ Total_Brain_Vol_log * DX_GROUP + AGE_AT_SCA
                          Abide_MGCFA_data_long)
 list = c(Accumbens_model1, Accumbens_model2, Accumbens_model3, Accumbens_model4, Accumbens_model5, Accumbens_model6)
 
-sink("Accumbens.csv") 
+sink("CSV/Accumbens.csv") 
 print(lapply(list, coef))
 sink()

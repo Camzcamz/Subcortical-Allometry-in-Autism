@@ -3,6 +3,10 @@ library(dplyr)
 library(simr)
 library(Stack)
 library(ggplot2)
+library(extrafont)
+font_import()
+loadfonts(device="win")     
+fonts()                       
 
 Abide_FSIQ = Abide_LMEM_log_Clean_scaled
 Abide_FSIQ$FSIQ <- scale(Abide_FSIQ$FIQ2)
@@ -262,13 +266,14 @@ names(Figure_Abide_Age_12_20)[names(Figure_Abide_Age_12_20) == "DX_GROUP"] <- "G
 # With outliers and comorbidity 
 Right_Hippocampus_figure <- ggplot(Figure_Abide_Age_12_20,
                                    aes(y=Right_Hippocampus_log, x= Total_Brain_Vol_log, shape = Group,color=Group)) +
-  geom_point(size = 2)+ 
+  geom_point(size = 3)+ 
   geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) +
-  scale_shape_manual(values = c(20, 20)) +
+  scale_shape_manual(values = c(18, 20)) +
   scale_color_manual(values=c('orangered3','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
   ylab("log10(Right Hippocampus)") + 
-  theme_classic() + My_Theme
+  theme_classic() + My_Theme + 
+  theme(text=element_text(family="Times New Roman", face="bold", size=12))
 
 Right_Hippocampus_figure 
 
@@ -276,13 +281,14 @@ Right_Hippocampus_figure
 # without comorbidity and outliers 
 Right_Hippocampus_figure_no_outlier<- ggplot(Right_Hippocampus_NEW_DF,
                                              aes(y=Right_Hippocampus_log, x= Total_Brain_Vol_log, shape = Group,color=Group)) +
-  geom_point(size = 2)+ 
+  geom_point(size = 3)+ 
   geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) +
-  scale_shape_manual(values = c(20, 20)) +
+  scale_shape_manual(values = c(18, 20)) +
   scale_color_manual(values=c('orangered3','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
   ylab("log10(Right Hippocampus)") + 
-  theme_classic() + My_Theme
+  theme_classic() + My_Theme + 
+  theme(text=element_text(family="Times New Roman", face="bold", size=12))
 
 Right_Hippocampus_figure_no_outlier 
 

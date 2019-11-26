@@ -3,6 +3,10 @@ library(dplyr)
 library(simr)
 library(Stack)
 library(ggplot2)
+library(extrafont)
+font_import()
+loadfonts(device="win")       
+fonts()                       
 
 Abide_FSIQ = Abide_LMEM_log_Clean_scaled
 Abide_FSIQ$FSIQ <- scale(Abide_FSIQ$FIQ2)
@@ -287,24 +291,26 @@ names(Figure_Abide_Over_FSIQ)[names(Figure_Abide_Over_FSIQ) == "DX_GROUP"] <- "G
 # With outliers and comorbidity 
 Left_Accumbens_Area_figure <- ggplot(Figure_Abide_Over_FSIQ,
                                      aes(y=Left_Accumbens_Area_log, x= Total_Brain_Vol_log, shape = Group,color=Group)) +
-  geom_point(size = 2)+ 
-  geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) + scale_shape_manual(values = c(20, 20)) + # 42
+  geom_point(size = 3)+ 
+  geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) + scale_shape_manual(values = c(18, 20)) + # 42
   scale_color_manual(values=c('orangered3','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
   ylab("log10(Left Accumbens Area)") + 
-  theme_classic() + My_Theme 
+  theme_classic() + My_Theme +
+  theme(text=element_text(family="Times New Roman", face="bold", size=12))
 
 Left_Accumbens_Area_figure
 
 # without comorbidity and outliers 
 Left_Accumbens_Area_figure_no_outlier<- ggplot(Left_Accumbens_Area_NEW_DF,
                                                aes(y=Left_Accumbens_Area_log, x= Total_Brain_Vol_log, shape = Group,color=Group)) +
-  geom_point(size = 2)+ 
-  geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) + scale_shape_manual(values = c(20, 20)) + # 42
+  geom_point(size = 3)+ 
+  geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) + scale_shape_manual(values = c(18, 20)) + # 42
   scale_color_manual(values=c('orangered3','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
   ylab("log10(Left Accumbens Area)") + 
-  theme_classic() + My_Theme
+  theme_classic() + My_Theme + 
+  theme(text=element_text(family="Times New Roman", face="bold", size=12))
 
 Left_Accumbens_Area_figure_no_outlier 
 

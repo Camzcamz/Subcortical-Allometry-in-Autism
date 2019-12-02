@@ -29,7 +29,7 @@ TGV_Site2 <-ggplot(Abide_Clean_Seg_figures, aes(x = SITE_ID2)) +
   ylab("Total Grey Matter Volume (mm3)") +
   xlab("Site ID") + 
   theme_classic() + My_Theme
-
+TGV_Site2
 pdf("Figures/TGV_Site2.pdf")
 TGV_Site2
 dev.off()
@@ -94,7 +94,7 @@ Accumbens_Site2 = ggplot(Abide_Clean_Seg_figures, aes(x = SITE_ID2)) +
                   summarise(Accumbens_Area  = mean(Accumbens_Area)), aes(x = SITE_ID2, ymin= Accumbens_Area, ymax = Accumbens_Area)) +
   geom_hline(aes(yintercept = mean(Accumbens_Area)), lty = 2)+
   ylim(0, 3000) + 
-  ylab("Accumbens Area Volume (mm3)") + 
+  ylab("Accumbens Volume (mm3)") + 
   xlab("Site ID") + 
   theme_classic()+ My_Theme
 
@@ -209,7 +209,7 @@ FIQ2_TBV<- ggplot(Abide_Clean_Seg_figures, aes(y=FIQ2, x= Total_Brain_Vol, shape
   geom_point(size = 2)+ 
   geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) +
   scale_shape_manual(values = c(20, 20)) +
-  scale_color_manual(values=c('orangered3','navyblue')) + 
+  scale_color_manual(values=c('orangered','navyblue')) + 
   ylim(70, 130) + 
   xlab("Total Brain Volume (mm3)") + 
   ylab("Full Scale Intelligence Quotient (FSIQ)") + 
@@ -223,9 +223,9 @@ dev.off()
 Abide_Clean_Seg_figures$Sex <- Abide_Clean_Seg_figures$SEX
 CWM_Age_Group_Sex <- ggplot(Abide_Clean_Seg_figures, aes(x=AGE_AT_SCAN, y=CorticalWhiteMatterVol, shape=SEX, color=SEX)) +
   geom_point(size = 2)+ 
-  geom_smooth(method=lm,fullrange=TRUE, aes(fill=SEX)) +
+  geom_smooth(method=lm,fullrange=TRUE, aes()) +
   scale_shape_manual(values = c(20, 20)) +
-  scale_color_manual(values=c('orangered3','navyblue')) + 
+  scale_color_manual(values=c('darkgreen','#56B4E9')) + 
   xlab("Age At Scan (Years)") + 
   ylab("Cortical White Matter Volume (mm3)") + 
   xlim(5,30)+
@@ -237,19 +237,21 @@ CWM_Age_Group_Sex
 dev.off()
 
 # The palette with black:
+Abide_Clean_Seg_figures$Group <- as.factor(Abide_Clean_Seg_figures$Group)
 
-Count_Site_ID_Group_Bar.plot <- ggplot(Abide_Clean_Seg_figures, aes(x = SITE_ID2, fill = Group)) +
+Count_Site_ID_Group_Bar.plot <- ggplot(Abide_Clean_Seg_figures, aes(x = SITE_ID2, color = Group, fill = Group)) +
   geom_bar(position = "stack") +
-  xlab("Site ID") + 
+  xlab("Site ID") +
   ylab("Number of Participants") + 
-  theme_classic()+ My_Theme
+  theme_classic()+ My_Theme +
+  scale_color_manual(values=c('orangered','navyblue')) +
+  scale_fill_manual(values = c("orangered", "navyblue"))
 
 pdf("Figures/Count_Site_ID_Group.pdf")
 Count_Site_ID_Group_Bar.plot
 dev.off()
 
 # SAME AS ZHANG : Count by Group by Sex By Site_ID2 
-Abide_Clean_Seg_figures <- Abide_Clean_Seg
 Abide_Clean_Seg_figures$Group = factor(Abide_Clean_Seg_figures$DX_GROUP, levels=c('Control','ASD'))
 Abide_Clean_Seg_figures$SITE_ID2 <- factor(Abide_Clean_Seg_figures$SITE_ID2 )
 Abide_Clean_Seg_figures$SITE_ID2 <- as.integer(Abide_Clean_Seg_figures$SITE_ID2)
@@ -258,9 +260,9 @@ Abide_Clean_Seg_figures$Sex <- Abide_Clean_Seg_figures$SEX
 Count_Site_ID_Group_Sex_Bar.plot = ggplot(Abide_Clean_Seg_figures, aes(x = SITE_ID2, fill = Sex)) +
   geom_bar() + facet_grid(Group~.)+
   ylab("Number of Participants") + 
-  ylab("Site ID") +
-  scale_x_discrete(Abide_Clean_Seg_figures$SITE_ID2) + 
-  theme_classic()+ My_Theme
+  xlab("Site ID") +
+  theme_classic()+ My_Theme + scale_color_manual(values=c('darkgreen','#56B4E9')) +
+  scale_fill_manual(values = c('darkgreen','#56B4E9'))
 
 pdf("Figures/Count_Site_ID_Group_Sex_Bar.plot.pdf")
 Count_Site_ID_Group_Sex_Bar.plot
@@ -274,8 +276,7 @@ Count_Site_ID_DSM_Group_Bar.plot = ggplot(Abide_Clean_Seg_figures, aes(x = SITE_
   geom_bar() +
   scale_fill_manual(values = c("#E69F00", "#56B4E9", "#0072B2", "#D55E00", "#CC79A7")) + 
   ylab("Number of Participants") + 
-  ylab("Site ID") +
-  scale_x_discrete(Abide_Clean_Seg_figures$SITE_ID2) + 
+  xlab("Site ID") +
   theme_classic() + My_Theme
 
 pdf("Figures/Count_Site_ID_DSM_Group_Bar.plot.pdf")
@@ -300,4 +301,3 @@ Count_Site_ID_Group_Bar.plot
 Count_Site_ID_Group_Sex_Bar.plot
 Count_Site_ID_DSM_Group_Bar.plot
 dev.off()
-

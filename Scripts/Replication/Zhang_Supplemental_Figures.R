@@ -1,7 +1,7 @@
 library(ggplot2)
 library(dplyr)
 library(lmerTest)
-
+library(gtools)
 Abide_Clean_Seg_figures <- Abide_LMEM_log_Clean
 Abide_Clean_Seg_figures$SITE_ID2 <- as.factor(Abide_Clean_Seg_figures$SITE_ID2)
 Abide_Clean_Seg_figures$SITE_ID2 <- as.numeric(Abide_Clean_Seg_figures$SITE_ID2)
@@ -272,9 +272,17 @@ dev.off()
 Abide_Clean_Seg_figures$SITE_ID2 <- as.factor(Abide_Clean_Seg_figures$SITE_ID2)
 Abide_Clean_Seg_figures$DSM <- as.factor(Abide_Clean_Seg_figures$DSM_IV_TR)
 
+DSM_Group_DF <- select(Abide_Clean_Seg_figures, Group, DSM)
+#View(DSM_Group_DF)
+# Replace <NA> with "NA" factor 
+levels <- levels(Abide_Clean_Seg_figures$DSM)
+levels[length(levels) + 1] <- "NA"
+Abide_Clean_Seg_figures$DSM <- factor(Abide_Clean_Seg_figures$DSM, levels = levels)
+Abide_Clean_Seg_figures$DSM[is.na(Abide_Clean_Seg_figures$DSM)] <- "NA"
+
 Count_Site_ID_DSM_Group_Bar.plot = ggplot(Abide_Clean_Seg_figures, aes(x = SITE_ID2, fill = DSM)) +
   geom_bar() +
-  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#0072B2", "#D55E00", "#CC79A7")) + 
+  scale_fill_manual(values = c("#E69F00", "#56B4E9", "#0072B2", "#D55E00", "#CC79A7", "darkgreen")) + 
   ylab("Number of Participants") + 
   xlab("Site ID") +
   theme_classic() + My_Theme

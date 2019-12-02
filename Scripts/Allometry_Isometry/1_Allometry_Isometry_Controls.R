@@ -18,6 +18,10 @@ LMEM_Full <- as.list(paste(DV_List_Final, "~  Total_Brain_Vol_log + AGE_AT_SCAN 
 
 Models_LMEM_Full <- lapply(LMEM_Full, function(x) {lmer(x,data=Abide_Jong_Controls)})
 names(Models_LMEM_Full) <- LMEM_Full
+# To examine Age and Sex Effects 
+View_All_Coefficients <- lapply(Models_LMEM_Full, function(x) {summary(x)$coefficients})
+View_All_Coefficients
+# To get TBV coefficients 
 Get_Coeffs_Model <- lapply(Models_LMEM_Full, function(x) {summary(x)$coefficients[2]})
 Get_Coeffs_Model_DF <- lapply(Get_Coeffs_Model,tidy)
 View(Get_Coeffs_Model)

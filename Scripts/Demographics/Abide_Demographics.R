@@ -77,10 +77,12 @@ table(Boys_Age_6_12$DX_GROUP)
 Boys_Age_13_19 = Abide_Clean_Seg%>%
   filter(AGE_AT_SCAN >= 12 & AGE_AT_SCAN <20) %>%
   filter(SEX == 'Male')
+table(Boys_Age_13_19$DX_GROUP)
 
 Boys_Age_20_27 = Abide_Clean_Seg%>%
   filter(AGE_AT_SCAN >=20) %>%
   filter(SEX == 'Male') 
+table(Boys_Age_20_27$DX_GROUP)
 
 ASD_Boys_Age_6_12 = Abide_Clean_Seg%>%
   filter(AGE_AT_SCAN <= 12) %>%
@@ -107,6 +109,11 @@ Control_Boys_Age_13_19 = Abide_Clean_Seg%>%
   filter(DX_GROUP== 'Control') %>%
   filter(SEX == 'Male') 
 
+Boys_FIQ_Under = Abide_Clean_Seg%>%
+  filter(FIQ2 <= 107.8) %>%
+  filter(SEX == 'Male') 
+table(Boys_FIQ_Under$DX_GROUP)
+
 Control_Boys_FIQ_Under = Abide_Clean_Seg%>%
   filter(FIQ2 <= 107.8) %>%
   filter(DX_GROUP== 'Control')%>%
@@ -117,6 +124,11 @@ ASD_Boys_FIQ_Under = Abide_Clean_Seg%>%
   filter(DX_GROUP== 'ASD')%>%
   filter(SEX == 'Male') 
 
+Boys_FIQ_Over = Abide_Clean_Seg%>%
+  filter(FIQ2 > 107.8) %>%
+  filter(SEX == 'Male') 
+table(Boys_FIQ_Over$DX_GROUP)
+
 ASD_Boys_FIQ_Over = Abide_Clean_Seg%>%
   filter(FIQ2 > 107.8) %>%
   filter(DX_GROUP== 'ASD')%>%
@@ -126,11 +138,6 @@ Control_Boys_FIQ_Over = Abide_Clean_Seg%>%
   filter(FIQ2 > 107.8) %>%
   filter(DX_GROUP== 'Control')%>%
   filter(SEX == 'Male') 
-
-Boys_FIQ_Over = Abide_Clean_Seg%>%
-  filter(FIQ2 <= 107.8) %>%
-  filter(SEX == 'Male') 
-
 
 ##### Generate Tables 
 Demographics_Table <- function (x) { 

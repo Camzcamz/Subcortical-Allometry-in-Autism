@@ -43,9 +43,6 @@ Abide_Age_12_20_C = Abide_Age_12_20 %>%
   filter (DX_GROUP =="Control")
 mean(Abide_Age_12_20_C$Right_Hippocampus)
 
-#Right_Hippocampus_MGCFA_model_power_sim <- powerSim(Right_Hippocampus_model,
-                                                    test = fixed("Total_Brain_Vol_log:DX_GROUPASD", "sa"))
-# Result: 89.10% (87.00, 90.96)
 # ASD 
 Abide_Age_12_20_ASD <- Abide_Age_12_20 %>% filter (DX_GROUP == "ASD")
 Abide_Age_12_20_ASD$Right_Hippocampus_log_not_scaled <- log10(Abide_Age_12_20_ASD$Right_Hippocampus)
@@ -120,8 +117,12 @@ Right_Hippocampus_model_MGCFA_no_Uni_Out <- lmer(Right_Hippocampus_log~ Total_Br
 summary(Right_Hippocampus_model_MGCFA_no_Uni_Out)$coefficients 
 p.adjust(summary(Right_Hippocampus_model_MGCFA_no_Uni_Out)$coefficients[,5], method = 'fdr') 
 
-#Right_Hippocampus_model_power_sim <- powerSim(Right_Hippocampus_model_MGCFA_no_Uni_Out,
+Right_Hippocampus_model_power_sim <- powerSim(Right_Hippocampus_model_MGCFA_no_Uni_Out,
                                               test = fixed("Total_Brain_Vol_log:GroupASD", "sa"))
+
+Right_Hippocampus_model_power_sim_Group <- powerSim(Right_Hippocampus_model_MGCFA_no_Uni_Out,
+                                                   test = fixed("GroupASD", "sa"))
+
 # Result: 82.90% (80.42, 85.18)
 # ASD 
 Right_Hippocampus_NEW_DF_ASD <- Right_Hippocampus_NEW_DF %>% filter (Group == "ASD")

@@ -295,7 +295,7 @@ Left_Accumbens_Area_figure_no_outlier<- ggplot(Left_Accumbens_Area_NEW_DF,
                                                aes(y=Left_Accumbens_Area_log, x= Total_Brain_Vol_log, shape = Group,color=Group)) +
   geom_point(size = 3)+ 
   geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) + scale_shape_manual(values = c(18, 20)) + # 42
-  scale_color_manual(values=c('orangered3','navyblue')) + 
+  scale_color_manual(values=c('orangered','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
   ylab("log10(Left Accumbens)") + 
   theme_classic() + My_Theme + 

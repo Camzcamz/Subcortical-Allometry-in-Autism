@@ -51,8 +51,8 @@ Abide_Age_12_20_ASD$Total_Brain_Vol_log_not_scaled <- log10(Abide_Age_12_20_ASD$
 Right_Hippocampus_model_no_outliers_ASD <- lmer(Right_Hippocampus_log_not_scaled~ Total_Brain_Vol_log_not_scaled
                                                 + (1|SITE_ID2), Abide_Age_12_20_ASD)
 
-summary(Right_Hippocampus_model_no_outliers_ASD)$coefficients #  0.6577306 0.08992488 135.8130  7.3142229 2.027613e-11
-p.adjust(summary(Right_Hippocampus_model_no_outliers_ASD)$coefficients[,5], method = 'fdr') #  4.055227e-11 
+summary(Right_Hippocampus_model_no_outliers_ASD)$coefficients 
+p.adjust(summary(Right_Hippocampus_model_no_outliers_ASD)$coefficients[,5], method = 'fdr')
 
 # Controls 
 Abide_Age_12_20_C <- Abide_Age_12_20 %>% filter (DX_GROUP == "Control")
@@ -62,8 +62,8 @@ Abide_Age_12_20_C$Total_Brain_Vol_log_not_scaled <- log10(Abide_Age_12_20_C$Tota
 Right_Hippocampus_model_no_outliers_C <- lmer(Right_Hippocampus_log_not_scaled~ Total_Brain_Vol_log_not_scaled
                                               + (1|SITE_ID2), Abide_Age_12_20_C)
 
-summary(Right_Hippocampus_model_no_outliers_C)$coefficients # 1.077797  0.1040690 119.6523 10.356569 2.472617e-18
-p.adjust(summary(Right_Hippocampus_model_no_outliers_C)$coefficients[,5], method = 'fdr') #4.945233e-18 
+summary(Right_Hippocampus_model_no_outliers_C)$coefficients 
+p.adjust(summary(Right_Hippocampus_model_no_outliers_C)$coefficients[,5], method = 'fdr') 
 
 #### II. Corresponding LMEMs (// MGCFA) without outliers & comorbidity 
 
@@ -143,8 +143,8 @@ Right_Hippocampus_NEW_DF_C$Total_Brain_Vol_log_not_scaled <- log10(Right_Hippoca
 Right_Hippocampus_model_no_outliers_C <- lmer(Right_Hippocampus_log_not_scaled~ Total_Brain_Vol_log_not_scaled+Medication
                                               + (1|SITE_ID2), Right_Hippocampus_NEW_DF_C)
 
-summary(Right_Hippocampus_model_no_outliers_C)$coefficients # 0.8227678 0.07771572 134.9922 10.58689 1.926945e-19
-p.adjust(summary(Right_Hippocampus_model_no_outliers_C)$coefficients[,5], method = 'fdr') #3.853890e-19 
+summary(Right_Hippocampus_model_no_outliers_C)$coefficients 
+p.adjust(summary(Right_Hippocampus_model_no_outliers_C)$coefficients[,5], method = 'fdr') 
 
 #################################################### RESEARCH Q2 ####################################################
 #### II. Subsamples - Full LMEMs with outliers & comorbidity 
@@ -163,8 +163,8 @@ Abide_Age_12_20_ASD$Total_Brain_Vol_log_not_scaled <- log10(Abide_Age_12_20_ASD$
 Right_Hippocampus_model_no_outliers_ASD <- lmer(Right_Hippocampus_log_not_scaled~ Total_Brain_Vol_log_not_scaled*FSIQ
                                                 + (1|SITE_ID2), Abide_Age_12_20_ASD)
 
-summary(Right_Hippocampus_model_no_outliers_ASD)$coefficients #  0.6694551 0.09263419 133.4011  7.2268683 3.431593e-11
-p.adjust(summary(Right_Hippocampus_model_no_outliers_ASD)$coefficients[,5], method = 'fdr') #    1.372637e-10     
+summary(Right_Hippocampus_model_no_outliers_ASD)$coefficients 
+p.adjust(summary(Right_Hippocampus_model_no_outliers_ASD)$coefficients[,5], method = 'fdr')    
 
 # Controls 
 Abide_Age_12_20_C <- Abide_Age_12_20 %>% filter (DX_GROUP == "Control")
@@ -174,8 +174,8 @@ Abide_Age_12_20_C$Total_Brain_Vol_log_not_scaled <- log10(Abide_Age_12_20_C$Tota
 Right_Hippocampus_model_no_outliers_C <- lmer(Right_Hippocampus_log_not_scaled~ Total_Brain_Vol_log_not_scaled*FSIQ
                                               + (1|SITE_ID2), Abide_Age_12_20_C)
 
-summary(Right_Hippocampus_model_no_outliers_C)$coefficients # 1.10819595  0.1137065 106.2694  9.7461082 2.041583e-16
-p.adjust(summary(Right_Hippocampus_model_no_outliers_C)$coefficients[,5], method = 'fdr') #  8.166332e-16      
+summary(Right_Hippocampus_model_no_outliers_C)$coefficients 
+p.adjust(summary(Right_Hippocampus_model_no_outliers_C)$coefficients[,5], method = 'fdr')    
 
 #### III. Subsamples - Full LMEMs without outliers & comorbidity 
 
@@ -270,7 +270,7 @@ Right_Hippocampus_figure <- ggplot(Figure_Abide_Age_12_20,
   geom_point(size = 3)+ 
   geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) +
   scale_shape_manual(values = c(18, 20)) +
-  scale_color_manual(values=c('orangered3','navyblue')) + 
+  scale_color_manual(values=c('orangered','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
   ylab("log10(Right Hippocampus)") + 
   theme_classic() + My_Theme + 
@@ -285,7 +285,7 @@ Right_Hippocampus_figure_no_outlier<- ggplot(Right_Hippocampus_NEW_DF,
   geom_point(size = 3)+ 
   geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) +
   scale_shape_manual(values = c(18, 20)) +
-  scale_color_manual(values=c('orangered3','navyblue')) + 
+  scale_color_manual(values=c('orangered','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
   ylab("log10(Right Hippocampus)") + 
   theme_classic() + My_Theme + 
@@ -328,5 +328,5 @@ Right_Hippocampus_no_outliers_ASD_ADOS_TOTAL_MODEL <- lmer(Right_Hippocampus_log
                                                            + (1|SITE_ID2), Right_Hippocampus_no_outliers_DSM)
 
 summary(Right_Hippocampus_no_outliers_ASD_ADOS_TOTAL_MODEL)$coefficients 
-p.adjust(summary(Right_Hippocampus_no_outliers_ASD_ADOS_TOTAL_MODEL)$coefficients[,5], method = 'fdr') # 3.670649e-01 
+p.adjust(summary(Right_Hippocampus_no_outliers_ASD_ADOS_TOTAL_MODEL)$coefficients[,5], method = 'fdr') 
 

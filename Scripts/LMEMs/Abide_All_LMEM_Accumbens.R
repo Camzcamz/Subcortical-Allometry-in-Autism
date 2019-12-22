@@ -30,13 +30,11 @@ table(Abide_Over_FSIQ$DX_GROUP) # 174 C # 100 ASD
 Left_Accumbens_area_model <- lmer(Left_Accumbens_Area_log~ Total_Brain_Vol_log*DX_GROUP
                                   + (1|SITE_ID2), Abide_Over_FSIQ)
 
-summary(Left_Accumbens_area_model)$coefficients # -0.3188396 0.09824270 257.15049 -3.2454286 1.328266e-03
-p.adjust(summary(Left_Accumbens_area_model)$coefficients[,5], method = 'fdr') #  2.656532e-03
+summary(Left_Accumbens_area_model)$coefficients 
+p.adjust(summary(Left_Accumbens_area_model)$coefficients[,5], method = 'fdr') 
 
-#tab_model(Left_Accumbens_area_model)
-#Left_Accumbens_area_MGCFA_model_power_sim <- powerSim(Left_Accumbens_area_model,
+Left_Accumbens_area_MGCFA_model_power_sim <- powerSim(Left_Accumbens_area_model,
                                                       test = fixed("Total_Brain_Vol_log:DX_GROUPASD", "sa"))
-# Result: 89.50% (87.43, 91.33)
 # ASD 
 Abide_Over_FSIQ_ASD <- Abide_Over_FSIQ %>% filter (DX_GROUP == "ASD")
 Abide_Over_FSIQ_ASD$Left_Accumbens_Area_log_not_scaled <- log10(Abide_Over_FSIQ_ASD$Left_Accumbens_Area)
@@ -45,8 +43,8 @@ Abide_Over_FSIQ_ASD$Total_Brain_Vol_log_not_scaled <- log10(Abide_Over_FSIQ_ASD$
 Left_Accumbens_Area_model_no_outliers_ASD <- lmer(Left_Accumbens_Area_log_not_scaled~ Total_Brain_Vol_log_not_scaled
                                                   + (1|SITE_ID2), Abide_Over_FSIQ_ASD)
 
-summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients #  0.4502134  0.1543303 96.50160 2.9172061 0.004393185
-p.adjust(summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients[,5], method = 'fdr') #    0.00878637 
+summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients 
+p.adjust(summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients[,5], method = 'fdr') 
 
 # Controls 
 Abide_Over_FSIQ_C <- Abide_Over_FSIQ %>% filter (DX_GROUP == "Control")
@@ -56,17 +54,15 @@ Abide_Over_FSIQ_C$Total_Brain_Vol_log_not_scaled <- log10(Abide_Over_FSIQ_C$Tota
 Left_Accumbens_Area_model_no_outliers_C <- lmer(Left_Accumbens_Area_log_not_scaled~ Total_Brain_Vol_log_not_scaled
                                                 + (1|SITE_ID2), Abide_Over_FSIQ_C)
 
-summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients # 1.213165  0.1825453 170.6791  6.645828 3.890867e-10
-p.adjust(summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients[,5], method = 'fdr') #  3.355321e-20 
+summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients 
+p.adjust(summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients[,5], method = 'fdr') #
 
 # 1. Remove comorbidities in C and ASD 
 Abide_Over_FSIQ_No_Comorbidity<-dplyr::filter(Abide_Over_FSIQ,is.na(COMORBIDITY)) 
 table(Abide_Over_FSIQ_No_Comorbidity$DX_GROUP) # C  172      88 
 
 #### Medication 
-#Left_Accumbens_Area_no_outliers_meds <- Abide_Over_FSIQ_No_Comorbidity
 Abide_Over_FSIQ_No_Comorbidity$MEDICATION_NAME 
-#Left_Accumbens_Area_no_outliers_meds <- Left_Accumbens_Area_no_outliers_meds[!is.na(Left_Accumbens_Area_no_outliers_meds$MEDICATION_NAME),]
 Abide_Over_FSIQ_No_Comorbidity$Medication<-if_else(is.na(Abide_Over_FSIQ_No_Comorbidity$MEDICATION_NAME), 0, 1)
 Abide_Over_FSIQ_No_Comorbidity$Medication<- as.factor(Abide_Over_FSIQ_No_Comorbidity$Medication)
 Left_Accumbens_Area_no_outliers_no_meds <- subset(Abide_Over_FSIQ_No_Comorbidity, Abide_Over_FSIQ_No_Comorbidity$Medication == 0)
@@ -116,11 +112,9 @@ Left_Accumbens_Area_model_MGCFA_no_Uni_Out <- lmer(Left_Accumbens_Area_log~ Tota
 
 summary(Left_Accumbens_Area_model_MGCFA_no_Uni_Out)$coefficients 
 p.adjust(summary(Left_Accumbens_Area_model_MGCFA_no_Uni_Out)$coefficients[,5], method = 'fdr') 
-# Group by TBV -0.25298459 0.10058418 235.31786 -2.5151529 1.256579e-02 &  2.513157e-02 
 
-#Left_Accumbens_Area_model_power_sim <- powerSim(Left_Accumbens_Area_model_MGCFA_no_Uni_Out,
+Left_Accumbens_Area_model_power_sim <- powerSim(Left_Accumbens_Area_model_MGCFA_no_Uni_Out,
                                                 test = fixed("Total_Brain_Vol_log:GroupASD", "sa"))
-# Result:     70.30% (67.36, 73.12)
 
 # ASD 
 Left_Accumbens_Area_no_outliers_ASD <- Left_Accumbens_Area_NEW_DF %>% filter (Group == "ASD")
@@ -130,8 +124,8 @@ Left_Accumbens_Area_no_outliers_ASD$Total_Brain_Vol_log_not_scaled <- log10(Left
 Left_Accumbens_Area_model_no_outliers_ASD <- lmer(Left_Accumbens_Area_log_not_scaled~ Total_Brain_Vol_log_not_scaled + Medication
                                                   + (1|SITE_ID2), Left_Accumbens_Area_no_outliers_ASD)
 
-summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients #  0.2594664  0.1821622 82.92321 1.424370 0.1580919
-p.adjust(summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients[,5], method = 'fdr') #    0.2428417 
+summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients
+p.adjust(summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients[,5], method = 'fdr') 
 
 # Controls 
 Left_Accumbens_Area_no_outliers_C <- Left_Accumbens_Area_NEW_DF %>% filter (Group == "Control")
@@ -141,8 +135,8 @@ Left_Accumbens_Area_no_outliers_C$Total_Brain_Vol_log_not_scaled <- log10(Left_A
 Left_Accumbens_Area_model_no_outliers_C <- lmer(Left_Accumbens_Area_log_not_scaled~ Total_Brain_Vol_log_not_scaled+ Medication
                                                 + (1|SITE_ID2), Left_Accumbens_Area_no_outliers_C)
 
-summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients # 0.9643099  0.1587182 158.1477  6.075609 8.873668e-09
-p.adjust(summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients[,5], method = 'fdr') #  2.131764e-09 
+summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients 
+p.adjust(summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients[,5], method = 'fdr') 
 
 #################################################### RESEARCH Q2 ####################################################
 #### I. Subsamples - Full LMEMs with outliers & comorbidity 
@@ -152,14 +146,12 @@ Left_Accumbens_Area_model_AGE<- lmer(Left_Accumbens_Area_log~ DX_GROUP*Total_Bra
 
 summary(Left_Accumbens_Area_model_AGE)$coefficients 
 p.adjust(summary(Left_Accumbens_Area_model_AGE)$coefficients[,5], method = 'fdr') 
-# TBV by G -0.28310466 0.10223736 253.85903 -2.7690921 6.036015e-03 & 2.414406e-02  
 
 Left_Accumbens_Area_model_AGE2<- lmer(Left_Accumbens_Area_log~ DX_GROUP*Total_Brain_Vol_log*AGE2
                                       + (1|SITE_ID2), Abide_Over_FSIQ)
 
 summary(Left_Accumbens_Area_model_AGE2)$coefficients 
 p.adjust(summary(Left_Accumbens_Area_model_AGE2)$coefficients[,5], method = 'fdr') 
-# TBV by G  -0.28238750 0.10190062 253.6895 -2.7712049 5.998428e-03 & 2.399371e-02    
 
 Abide_Over_FSIQ_ASD <- Abide_Over_FSIQ %>% filter (DX_GROUP == "ASD")
 Abide_Over_FSIQ_ASD$Left_Accumbens_Area_log_not_scaled <- log10(Abide_Over_FSIQ_ASD$Left_Accumbens_Area)
@@ -168,8 +160,8 @@ Abide_Over_FSIQ_ASD$Total_Brain_Vol_log_not_scaled <- log10(Abide_Over_FSIQ_ASD$
 Left_Accumbens_Area_model_no_outliers_ASD <- lmer(Left_Accumbens_Area_log_not_scaled~ Total_Brain_Vol_log_not_scaled*AGE2
                                                   + (1|SITE_ID2), Abide_Over_FSIQ_ASD)
 
-summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients #   0.5418215  0.1616386 95.99223  3.3520543 0.001148663
-p.adjust(summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients[,5], method = 'fdr') #     0.004594652        
+summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients 
+p.adjust(summary(Left_Accumbens_Area_model_no_outliers_ASD)$coefficients[,5], method = 'fdr')       
 
 # Controls 
 Abide_Over_FSIQ_C <- Abide_Over_FSIQ %>% filter (DX_GROUP == "Control")
@@ -179,8 +171,8 @@ Abide_Over_FSIQ_C$Total_Brain_Vol_log_not_scaled <- log10(Abide_Over_FSIQ_C$Tota
 Left_Accumbens_Area_model_no_outliers_C <- lmer(Left_Accumbens_Area_log_not_scaled~ Total_Brain_Vol_log_not_scaled*AGE2
                                                 + (1|SITE_ID2), Abide_Over_FSIQ_C)
 
-summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients # 1.2550845  0.1831175 168.4563  6.8539863 1.295145e-10
-p.adjust(summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients[,5], method = 'fdr') #  5.180582e-10   
+summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients
+p.adjust(summary(Left_Accumbens_Area_model_no_outliers_C)$coefficients[,5], method = 'fdr')    
 
 
 #### II. Subsamples - Full LMEMs without outliers & comorbidity 
@@ -213,17 +205,6 @@ summary(Left_Accumbens_Area_model_no_outliers_AGE2)$coefficients
 p.adjust(summary(Left_Accumbens_Area_model_no_outliers_AGE2)$coefficients[,5], method = 'fdr') 
 
 #### Medication 
-#table(Left_Accumbens_Area_no_outliers$Group) #  162      79 
-#Left_Accumbens_Area_no_outliers_meds <- Left_Accumbens_Area_no_outliers
-#Left_Accumbens_Area_no_outliers_meds$MEDICATION_NAME 
-#Left_Accumbens_Area_no_outliers_meds <- Left_Accumbens_Area_no_outliers_meds[!is.na(Left_Accumbens_Area_no_outliers_meds$MEDICATION_NAME),]
-#table(Left_Accumbens_Area_no_outliers_meds$Group)
-
-#Left_Accumbens_Area_no_outliers_meds$Medication<-if_else(is.na(Left_Accumbens_Area_no_outliers_meds$MEDICATION_NAME), 0, 1)
-#Left_Accumbens_Area_no_outliers_meds$Medication <- as.factor(Left_Accumbens_Area_no_outliers_meds$Medication)
-
-#Left_Accumbens_Area_no_outliers_no_meds <- subset(Left_Accumbens_Area_no_outliers_meds, Left_Accumbens_Area_no_outliers_meds$Medication == 0)
-#table(Left_Accumbens_Area_no_outliers_no_meds$Group)
 
 # ASD 
 Left_Accumbens_Area_no_outliers_ASD <- Left_Accumbens_Area_no_outliers %>% filter (Group == "ASD")
@@ -250,7 +231,7 @@ p.adjust(summary(Left_Accumbens_Area_model_no_outliers_C_FSIQ)$coefficients[,5],
 Left_Accumbens_Area_model_power_sim_FSIQ <- powerSim(Left_Accumbens_Area_model_no_outliers_AGE,
                                                      test = fixed("Total_Brain_Vol_log:GroupASD", "sa"))
 Left_Accumbens_Area_model_power_sim_FSIQ
-# Result: 
+
 
 #### IV - Comparing Adjustment Techniques 
 Left_Accumbens_Area_no_outliers$Total_Brain_Vol <- scale(Left_Accumbens_Area_no_outliers$Total_Brain_Vol)
@@ -303,7 +284,7 @@ Left_Accumbens_Area_figure <- ggplot(Figure_Abide_Over_FSIQ,
   geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) + scale_shape_manual(values = c(18, 20)) + # 42
   scale_color_manual(values=c('orangered','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
-  ylab("log10(Left Accumbens Area)") + 
+  ylab("log10(Left Accumbens)") + 
   theme_classic() + My_Theme +
   theme(text=element_text(family="Times New Roman", face="bold", size=12))
 
@@ -316,7 +297,7 @@ Left_Accumbens_Area_figure_no_outlier<- ggplot(Left_Accumbens_Area_NEW_DF,
   geom_smooth(method=lm,fullrange=TRUE, aes(fill=Group)) + scale_shape_manual(values = c(18, 20)) + # 42
   scale_color_manual(values=c('orangered3','navyblue')) + 
   xlab("log10(Total Brain Volume)") + 
-  ylab("log10(Left Accumbens Area)") + 
+  ylab("log10(Left Accumbens)") + 
   theme_classic() + My_Theme + 
   theme(text=element_text(family="Times New Roman", face="bold", size=12))
 
@@ -481,8 +462,8 @@ Left_Caudate_figure_no_outlier
 Right_Ventral_DC_model <- lmer(Right_Ventral_DC_log~ Total_Brain_Vol_log*DX_GROUP
                                + (1|SITE_ID2), Abide_Over_FSIQ)
 
-summary(Right_Ventral_DC_model)$coefficients # -0.28137450  0.1060940 259.28557 -2.6521242 8.491779e-03
-p.adjust(summary(Right_Ventral_DC_model)$coefficients[,5], method = 'fdr') #  6.063289e-03 
+summary(Right_Ventral_DC_model)$coefficients 
+p.adjust(summary(Right_Ventral_DC_model)$coefficients[,5], method = 'fdr') 
 
 # Create New DF for each Group 
 Abide_Over_FSIQ_ASD<- Abide_Over_FSIQ_No_Comorbidity %>% 
@@ -531,9 +512,9 @@ p.adjust(summary(Right_Ventral_DC_model_MGCFA_no_Uni_Out)$coefficients[,5], meth
 Left_Pallidum_model <- lmer(Left_Pallidum_log~ Total_Brain_Vol_log*DX_GROUP
                             + (1|SITE_ID2), Abide_Over_FSIQ)
 
-summary(Left_Pallidum_model)$coefficients # -0.26120679 0.10231604 259.34628 -2.5529406 1.125511e-02
-p.adjust(summary(Left_Pallidum_model)$coefficients[,5], method = 'fdr') #    2.251023e-02 
-# DX GROUP -0.22218831 0.10105555 264.50492  2.1986751 2.876715e-02 & 3.835620e-02      
+summary(Left_Pallidum_model)$coefficients 
+p.adjust(summary(Left_Pallidum_model)$coefficients[,5], method = 'fdr') 
+   
 
 # Create New DF for each Group 
 Abide_Over_FSIQ_ASD<- Abide_Over_FSIQ_No_Comorbidity %>% 
@@ -573,9 +554,8 @@ table(Left_Pallidum_NEW_DF$Group) #  168      87
 Left_Pallidum_model_MGCFA_no_Uni_Out <- lmer(Left_Pallidum_log~ Total_Brain_Vol_log*Group+ Medication
                                              + (1|SITE_ID2), Left_Pallidum_NEW_DF)
 
-summary(Left_Pallidum_model_MGCFA_no_Uni_Out)$coefficients # 0.07787244 0.10918384 239.06367 0.7132231 4.764033e-01 & 6.078439e-01 
-p.adjust(summary(Left_Pallidum_model_MGCFA_no_Uni_Out)$coefficients[,5], method = 'fdr') 
-#  0.02319258 0.10779470 247.97754 0.2151551 8.298232e-01 & 8.298232e-01  
+summary(Left_Pallidum_model_MGCFA_no_Uni_Out)$coefficients 
+p.adjust(summary(Left_Pallidum_model_MGCFA_no_Uni_Out)$coefficients[,5], method = 'fdr')  
 
 Left_Pallidum_figure_no_outlier<- ggplot(Left_Pallidum_no_outliers,
                                          aes(y=Left_Pallidum_log, x= Total_Brain_Vol_log, shape = Group,color=Group)) +
@@ -591,8 +571,8 @@ Left_Pallidum_figure_no_outlier
 CorticalWhiteMatterVol_model <- lmer(CorticalWhiteMatterVol_log~ Total_Brain_Vol_log*DX_GROUP
                                      + (1|SITE_ID2), Abide_Over_FSIQ)
 
-summary(CorticalWhiteMatterVol_model)$coefficients # 0.009010852 0.05256774 257.90415  0.1714141 8.640326e-01
-p.adjust(summary(CorticalWhiteMatterVol_model)$coefficients[,5], method = 'fdr') # 6.708807e-01
+summary(CorticalWhiteMatterVol_model)$coefficients 
+p.adjust(summary(CorticalWhiteMatterVol_model)$coefficients[,5], method = 'fdr') 
 
 # Create New DF for each Group 
 Abide_Over_FSIQ_ASD<- Abide_Over_FSIQ_No_Comorbidity %>% 
@@ -633,8 +613,7 @@ CorticalWhiteMatterVol_model_MGCFA_no_Uni_Out <- lmer(CorticalWhiteMatterVol_log
                                                       + (1|SITE_ID2), CorticalWhiteMatterVol_NEW_DF)
 
 summary(CorticalWhiteMatterVol_model_MGCFA_no_Uni_Out)$coefficients 
-p.adjust(summary(CorticalWhiteMatterVol_model_MGCFA_no_Uni_Out)$coefficients[,5], method = 'fdr') 
-#  0.01731167 0.06181474 239.02026  0.2800574 7.796757e-01 &  7.796757e-01   
+p.adjust(summary(CorticalWhiteMatterVol_model_MGCFA_no_Uni_Out)$coefficients[,5], method = 'fdr')
 
 CorticalWhiteMatterVol_figure_no_outlier<- ggplot(CorticalWhiteMatterVol_no_outliers,
                                                   aes(y=CorticalWhiteMatterVol_log, x= Total_Brain_Vol_log, shape = Group,color=Group)) +
